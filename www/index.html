@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beladi — General Contracting, General Services &amp; Information Technology</title>
+<meta name="description" content="Beladi Company — IT infrastructure, electronic security, telecommunications and electrical &amp; instrumentation solutions across Iraq.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1917;
+    --ink-2:#2B1917;
+    --paper:#F6F5F3;
+    --paper-2:#EAE6E2;
+    --line:#DAD5D1;
+    --line-dark:rgba(246,245,243,0.15);
+    --steel:#756F6A;
+    --signal:#DA3835;
+    --signal-dim:#F0AFAA;
+    --white:#FFFFFF;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'IBM Plex Sans',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .mono{font-family:var(--font-mono);}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--signal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--signal);
+    display:inline-block;
+  }
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;}
+  ::selection{background:var(--signal);color:var(--white);}
+
+  /* Blueprint grid backdrop */
+  .grid-bg{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:44px 44px;
+    pointer-events:none;
+  }
+  .grid-bg.light{
+    background-image:
+      linear-gradient(rgba(28,25,23,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(28,25,23,0.055) 1px, transparent 1px);
+  }
+
+  /* corner ticks for spec cards */
+  .tick{position:relative;}
+  .tick::before,.tick::after{
+    content:"";position:absolute;width:10px;height:10px;
+    border:1px solid var(--line);
+    opacity:0.9;
+  }
+  .tick::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .tick::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(28,25,23,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo img{display:block;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{
+    color:var(--paper);opacity:0.8;font-size:14px;font-weight:500;
+    transition:opacity 0.2s;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;
+    color:var(--white) !important;background:var(--signal);
+    padding:10px 18px;border:1px solid var(--signal);opacity:1 !important;
+    transition:background 0.2s,color 0.2s;
+  }
+  .nav-cta:hover{background:transparent;color:var(--white) !important;}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .burger span{width:24px;height:2px;background:var(--white);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg,var(--ink) 0%, var(--ink-2) 100%);
+    color:var(--paper);
+    padding:172px 0 120px;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;
+    position:relative;z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(34px,4.6vw,58px);
+    line-height:1.06;color:var(--white);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--signal-dim);
+  }
+  .hero p{
+    font-size:17px;color:rgba(246,245,243,0.72);
+    max-width:480px;margin-bottom:34px;
+  }
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.04em;
+    padding:14px 24px;border:1px solid var(--signal);
+    transition:all 0.2s;display:inline-block;
+  }
+  .btn-solid{background:var(--signal);color:var(--white);}
+  .btn-solid:hover{background:transparent;color:var(--signal-dim);}
+  .btn-ghost{color:var(--paper);border-color:var(--line-dark);}
+  .btn-ghost:hover{border-color:var(--signal);color:var(--signal-dim);}
+
+  .signal-map{width:100%;height:auto;}
+  .signal-map .node-dot{fill:var(--signal);}
+  .signal-map .node-ring{
+    fill:none;stroke:var(--signal);stroke-width:1;opacity:0.5;
+    transform-origin:center;
+    animation:pulse 2.6s ease-out infinite;
+  }
+  .signal-map .link{
+    fill:none;stroke:var(--signal-dim);stroke-width:1.2;
+    stroke-dasharray:4 5;opacity:0.55;
+    animation:dash 3.5s linear infinite;
+  }
+  .signal-map .label{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    fill:rgba(246,245,243,0.55);letter-spacing:0.04em;
+  }
+  @keyframes dash{to{stroke-dashoffset:-90;}}
+  @keyframes pulse{
+    0%{r:5;opacity:0.7;}
+    100%{r:26;opacity:0;}
+  }
+
+  .stat-strip{
+    border-top:1px solid var(--line-dark);
+    margin-top:80px;padding-top:32px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    position:relative;z-index:2;
+  }
+  .stat-strip div b{
+    display:block;font-family:var(--font-display);font-size:26px;color:var(--white);
+  }
+  .stat-strip div span{
+    font-family:var(--font-mono);font-size:11px;color:var(--steel);
+    text-transform:uppercase;letter-spacing:0.06em;
+  }
+
+  /* ---------- MARQUEE / TRUSTED BY ---------- */
+  .trusted{
+    background:var(--ink);border-top:1px solid var(--line-dark);
+    padding:26px 0;overflow:hidden;
+  }
+  .trusted-track{
+    display:flex;gap:64px;white-space:nowrap;
+    animation:scroll 32s linear infinite;
+    width:max-content;
+  }
+  .trusted-track span{
+    font-family:var(--font-mono);font-size:14px;
+    color:rgba(246,245,243,0.5);letter-spacing:0.04em;
+  }
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{position:relative;padding:110px 0;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:56px;gap:24px;flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(26px,3.4vw,40px);max-width:640px;}
+  .section-head p{color:var(--steel);max-width:340px;font-size:14.5px;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--paper);}
+  .service-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--paper);padding:38px 36px;position:relative;
+    transition:background 0.25s;
+  }
+  .service-card:hover{background:var(--white);}
+  .service-card .num{
+    font-family:var(--font-mono);font-size:12px;color:var(--signal);
+    margin-bottom:20px;display:block;
+  }
+  .service-card h3{font-size:21px;margin-bottom:12px;}
+  .service-card p{font-size:14.5px;color:var(--steel);margin-bottom:18px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    font-family:var(--font-mono);font-size:10.5px;color:var(--ink);
+    border:1px solid var(--line);padding:5px 10px;
+    background:var(--paper-2);
+  }
+
+  /* ---------- SECTOR ---------- */
+  .sector{
+    background:var(--ink);color:var(--paper);overflow:hidden;
+  }
+  .sector-inner{
+    display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;
+    position:relative;z-index:2;
+  }
+  .sector h2{color:var(--white);font-size:clamp(24px,3vw,34px);margin-bottom:20px;}
+  .sector p{color:rgba(246,245,243,0.7);font-size:15px;margin-bottom:16px;max-width:480px;}
+  .sector-clients{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  }
+  .client-card{
+    border:1px solid var(--line-dark);padding:20px;
+  }
+  .client-card b{
+    font-family:var(--font-display);font-size:15px;display:block;margin-bottom:6px;color:var(--white);
+  }
+  .client-card span{font-size:12.5px;color:var(--steel);line-height:1.5;}
+
+  /* ---------- CERTS ---------- */
+  .certs{background:var(--paper-2);}
+  .cert-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .cert-card{
+    background:var(--white);border:1px solid var(--line);padding:30px 26px;
+  }
+  .cert-card .iso-no{
+    font-family:var(--font-mono);font-size:22px;color:var(--ink);margin-bottom:8px;
+  }
+  .cert-card .iso-name{font-size:13.5px;color:var(--steel);margin-bottom:14px;}
+  .cert-card .iso-scope{
+    font-family:var(--font-mono);font-size:10.5px;color:var(--signal);
+    text-transform:uppercase;letter-spacing:0.05em;
+  }
+
+  /* ---------- PARTNERS ---------- */
+  .partners{background:var(--paper);}
+  .partner-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);
+  }
+  .partner-card{
+    background:var(--white);padding:26px;min-height:96px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .partner-card b{font-family:var(--font-display);font-size:16px;}
+  .partner-card span{font-family:var(--font-mono);font-size:10px;color:var(--steel);margin-top:4px;}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--white);}
+  .about-inner{
+    display:grid;grid-template-columns:0.8fr 1.2fr;gap:60px;
+  }
+  .about-col h3{font-size:22px;margin-bottom:16px;}
+  .mv-block{margin-bottom:34px;}
+  .mv-block .eyebrow{margin-bottom:10px;}
+  .mv-block p{font-size:14.5px;color:var(--steel);}
+  .team-grid{display:grid;gap:20px;}
+  .team-row{
+    display:grid;grid-template-columns:140px 1fr;gap:20px;
+    padding:20px 0;border-top:1px solid var(--line);
+  }
+  .team-row:last-child{border-bottom:1px solid var(--line);}
+  .team-row .role{font-family:var(--font-mono);font-size:11.5px;color:var(--signal);text-transform:uppercase;letter-spacing:0.04em;}
+  .team-row p{font-size:14px;color:var(--steel);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--ink);color:var(--paper);
+  }
+  .contact-inner{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  }
+  .contact h2{color:var(--white);font-size:clamp(26px,3.4vw,38px);margin-bottom:18px;}
+  .contact > .wrap > .contact-inner p{color:rgba(246,245,243,0.7);font-size:15px;margin-bottom:30px;max-width:420px;}
+  .info-row{
+    display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line-dark);
+  }
+  .info-row:last-of-type{border-bottom:1px solid var(--line-dark);}
+  .info-row .k{font-family:var(--font-mono);font-size:11px;color:var(--signal);text-transform:uppercase;letter-spacing:0.06em;width:90px;flex-shrink:0;padding-top:2px;}
+  .info-row .v{font-size:14.5px;color:var(--paper);}
+  .info-row .v a:hover{color:var(--signal-dim);}
+
+  form{display:flex;flex-direction:column;gap:16px;}
+  .field label{
+    font-family:var(--font-mono);font-size:11px;text-transform:uppercase;
+    letter-spacing:0.06em;color:var(--steel);display:block;margin-bottom:8px;
+  }
+  .field input,.field textarea{
+    width:100%;background:transparent;border:1px solid var(--line-dark);
+    padding:12px 14px;color:var(--white);font-family:var(--font-body);font-size:14px;
+    resize:vertical;
+  }
+  .field input:focus,.field textarea:focus{outline:2px solid var(--signal);outline-offset:2px;border-color:var(--signal);}
+  .field input::placeholder,.field textarea::placeholder{color:rgba(246,245,243,0.35);}
+  .submit-btn{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.04em;
+    padding:14px 24px;background:var(--signal);color:var(--white);border:1px solid var(--signal);
+    cursor:pointer;align-self:flex-start;margin-top:6px;transition:background 0.2s,color 0.2s;
+  }
+  .submit-btn:hover{background:transparent;color:var(--signal-dim);}
+  .submit-btn:focus-visible, a:focus-visible, button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);border-top:1px solid var(--line-dark);
+    padding:28px 0;color:var(--steel);font-size:12.5px;
+  }
+  .footer-inner{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  }
+  .footer-inner .mono{font-size:11px;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-inner{grid-template-columns:1fr;}
+    .signal-map{order:-1;max-width:320px;margin:0 auto 20px;}
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .service-grid{grid-template-columns:1fr;}
+    .sector-inner{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    .about-inner{grid-template-columns:1fr;}
+    .contact-inner{grid-template-columns:1fr;}
+    .team-row{grid-template-columns:1fr;gap:6px;}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 20px;}
+    .hero{padding:140px 0 80px;}
+    section{padding:80px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo"><img src="assets/logo-wordmark.png" alt="Beladi" height="26"></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#sector">Oil &amp; Gas</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Get a quote</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobileMenu" style="display:none;position:fixed;inset:0;top:64px;background:var(--ink);z-index:99;padding:32px;">
+  <div style="display:flex;flex-direction:column;gap:26px;font-family:var(--font-display);font-size:22px;">
+    <a href="#services">Services</a>
+    <a href="#sector">Oil &amp; Gas</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#about">About</a>
+    <a href="#contact" style="color:var(--signal);">Get a quote →</a>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:172px;">
+    <div class="grid-bg"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <img src="assets/logo-icon.png" alt="" height="56" style="margin-bottom:22px;">
+        <div class="eyebrow">Basra, Iraq · Est. contracting &amp; IT house</div>
+        <h1>Engineering Iraq's <em>critical connections.</em></h1>
+        <p>Beladi designs, installs and maintains the IT, security, telecom and electrical infrastructure that keeps remote sites, government facilities and energy operations talking to the outside world.</p>
+        <div class="btn-row">
+          <a href="#contact" class="btn btn-solid">Get a quote →</a>
+          <a href="#services" class="btn btn-ghost">View services</a>
+        </div>
+      </div>
+
+      <svg class="signal-map" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- links -->
+        <path class="link" d="M 90 250 C 140 220, 160 180, 210 170" style="animation-delay:0s"/>
+        <path class="link" d="M 210 170 C 250 150, 280 120, 320 90" style="animation-delay:0.4s"/>
+        <path class="link" d="M 210 170 C 200 210, 210 250, 240 280" style="animation-delay:0.8s"/>
+        <path class="link" d="M 210 170 C 160 140, 120 110, 100 70" style="animation-delay:1.2s"/>
+        <!-- nodes -->
+        <g>
+          <circle class="node-ring" cx="210" cy="170" r="5"/>
+          <circle class="node-dot" cx="210" cy="170" r="5"/>
+          <text class="label" x="222" y="166">BASRA HUB</text>
+        </g>
+        <g>
+          <circle class="node-ring" cx="90" cy="250" r="4" style="animation-delay:0.3s"/>
+          <circle class="node-dot" cx="90" cy="250" r="4"/>
+          <text class="label" x="20" y="272">OIL FIELD SITE</text>
+        </g>
+        <g>
+          <circle class="node-ring" cx="320" cy="90" r="4" style="animation-delay:0.6s"/>
+          <circle class="node-dot" cx="320" cy="90" r="4"/>
+          <text class="label" x="290" y="76">VSAT / SATELLITE</text>
+        </g>
+        <g>
+          <circle class="node-ring" cx="240" cy="280" r="4" style="animation-delay:0.9s"/>
+          <circle class="node-dot" cx="240" cy="280" r="4"/>
+          <text class="label" x="252" y="298">CORPORATE OFFICE</text>
+        </g>
+        <g>
+          <circle class="node-ring" cx="100" cy="70" r="4" style="animation-delay:1.2s"/>
+          <circle class="node-dot" cx="100" cy="70" r="4"/>
+          <text class="label" x="34" y="56">RF / PTP TOWER</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="wrap stat-strip">
+      <div><b>4</b><span>Core service lines</span></div>
+      <div><b>11+</b><span>Enterprise &amp; UN clients</span></div>
+      <div><b>3</b><span>ISO certifications</span></div>
+      <div><b>South Iraq</b><span>Basra · Missan · Thiqar · Almuthana</span></div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY MARQUEE -->
+  <div class="trusted">
+    <div class="trusted-track">
+      <span>EXXONMOBIL</span><span>MAJNOON OIL FIELD</span><span>BASRAH GAS COMPANY</span><span>MINISTRY OF ELECTRICITY</span><span>UNICEF</span><span>ENI</span><span>KUWAIT ENERGY</span><span>WOOD</span><span>PETROCHINA INTERNATIONAL IRAQ</span><span>IOM</span><span>FAO</span>
+      <span>EXXONMOBIL</span><span>MAJNOON OIL FIELD</span><span>BASRAH GAS COMPANY</span><span>MINISTRY OF ELECTRICITY</span><span>UNICEF</span><span>ENI</span><span>KUWAIT ENERGY</span><span>WOOD</span><span>PETROCHINA INTERNATIONAL IRAQ</span><span>IOM</span><span>FAO</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">What we build</div>
+          <h2>Four disciplines, one accountable contractor.</h2>
+        </div>
+        <p>From cable pull to commissioning, Beladi's certified teams handle design, installation and after-sales support in-house.</p>
+      </div>
+
+      <div class="service-grid reveal">
+        <div class="service-card tick">
+          <span class="num">01 / IT Infrastructure</span>
+          <h3>Network &amp; data center builds</h3>
+          <p>End-to-end cabling, switching and routing, plus data center and server/storage deployments delivered with AST Modular, a Schneider Electric company.</p>
+          <div class="tag-row">
+            <span class="tag">Cabling</span><span class="tag">Switching &amp; routing</span><span class="tag">Data centers</span><span class="tag">Server &amp; storage</span>
+          </div>
+        </div>
+        <div class="service-card tick">
+          <span class="num">02 / Electronic Security</span>
+          <h3>Surveillance, fire &amp; access control</h3>
+          <p>Networked CCTV, fire alarm design and monitoring, and access control systems integrated with manned guarding under one management structure.</p>
+          <div class="tag-row">
+            <span class="tag">CCTV / IP video</span><span class="tag">Fire alarm</span><span class="tag">Access control</span><span class="tag">Bosch · Axis · Sony</span>
+          </div>
+        </div>
+        <div class="service-card tick">
+          <span class="num">03 / Telecommunications</span>
+          <h3>RF, VSAT &amp; microwave links</h3>
+          <p>Authorized Motorola and Codan RF partner delivering VSAT, point-to-point/point-to-multipoint and microwave links across southern Iraq.</p>
+          <div class="tag-row">
+            <span class="tag">RF / Tetra</span><span class="tag">VSAT / NOC</span><span class="tag">PTP &amp; PMP</span><span class="tag">Microwave links</span>
+          </div>
+        </div>
+        <div class="service-card tick">
+          <span class="num">04 / Electrical &amp; Instrumentation</span>
+          <h3>HV/MV substations</h3>
+          <p>Design, supply, construction, testing and commissioning of high- and medium-voltage substations, including control system modification.</p>
+          <div class="tag-row">
+            <span class="tag">HV/MV substations</span><span class="tag">Control systems</span><span class="tag">Testing &amp; commissioning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTOR FOCUS -->
+  <section class="sector" id="sector">
+    <div class="grid-bg"></div>
+    <div class="wrap sector-inner">
+      <div class="reveal">
+        <div class="eyebrow">Sector focus</div>
+        <h2>Communications for oil &amp; gas, built for remote and hazardous sites.</h2>
+        <p>Energy operators need dependable links between distant fields and corporate offices. Beladi integrates RF, VSAT and microwave systems so field and headquarters teams stay connected under real operating conditions.</p>
+        <a href="#contact" class="btn btn-solid" style="margin-top:10px;">Discuss a site →</a>
+      </div>
+      <div class="sector-clients reveal">
+        <div class="client-card"><b>ExxonMobil</b><span>American multinational oil &amp; gas corporation.</span></div>
+        <div class="client-card"><b>Majnoon Oil Field</b><span>Giant field south of Basra, ~38 billion barrels.</span></div>
+        <div class="client-card"><b>Basrah Gas Company</b><span>South Gas Co · Shell · Mitsubishi joint venture.</span></div>
+        <div class="client-card"><b>Kuwait Energy</b><span>Exploration, appraisal &amp; production, est. 2005.</span></div>
+        <div class="client-card"><b>Eni</b><span>Italian supermajor operating in 62 countries.</span></div>
+        <div class="client-card"><b>PetroChina Intl. Iraq</b><span>Consortium operator under Iraq's Ministry of Oil.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="certs" id="certifications">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">Independently verified</div>
+          <h2>Certified to run on regulated sites.</h2>
+        </div>
+        <p>Beladi Co. For General Contracting Ltd. holds current ISO certification across quality, environment and safety.</p>
+      </div>
+      <div class="cert-grid reveal">
+        <div class="cert-card tick">
+          <div class="iso-no">ISO 9001:2015</div>
+          <div class="iso-name">Quality Management System</div>
+          <div class="iso-scope">General contracting · Electrical &amp; mechanical works · IT</div>
+        </div>
+        <div class="cert-card tick">
+          <div class="iso-no">ISO 14001:2015</div>
+          <div class="iso-name">Environmental Management System</div>
+          <div class="iso-scope">General contracting · Electrical &amp; mechanical works · IT</div>
+        </div>
+        <div class="cert-card tick">
+          <div class="iso-no">ISO 45001:2018</div>
+          <div class="iso-name">Occupational Health &amp; Safety</div>
+          <div class="iso-scope">General contracting · Electrical &amp; mechanical works · IT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">Manufacturer alliances</div>
+          <h2>Authorized to sell, install and support.</h2>
+        </div>
+      </div>
+      <div class="partner-grid reveal">
+        <div class="partner-card"><b>Lenovo</b><span>PCs &amp; mobile devices</span></div>
+        <div class="partner-card"><b>Western Digital</b><span>Storage &amp; data center systems</span></div>
+        <div class="partner-card"><b>Huawei</b><span>Telecom equipment</span></div>
+        <div class="partner-card"><b>Motorola / Codan</b><span>Authorized RF partner</span></div>
+        <div class="partner-card"><b>Bosch / Axis / Sony</b><span>Preferred CCTV partners</span></div>
+        <div class="partner-card"><b>AST Modular</b><span>Schneider Electric — data centers</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-inner">
+      <div class="about-col reveal">
+        <div class="mv-block">
+          <div class="eyebrow">Vision</div>
+          <p>To lead Iraq's IT systems and communications sector by staying ahead of advances in control and communication technology, and by keeping customer relationships at the center of how we work.</p>
+        </div>
+        <div class="mv-block">
+          <div class="eyebrow">Mission</div>
+          <p>To produce, maintain and deliver cutting-edge control devices and communication equipment — investing in R&amp;D and partnerships so our solutions keep pace with the industry, not behind it.</p>
+        </div>
+      </div>
+      <div class="about-col reveal">
+        <h3>Team &amp; expertise</h3>
+        <div class="team-grid">
+          <div class="team-row">
+            <div class="role">Contracting</div>
+            <p>Project managers, engineers and skilled technicians running construction and infrastructure projects on time and on budget.</p>
+          </div>
+          <div class="team-row">
+            <div class="role">General services</div>
+            <p>Facility management, maintenance, logistics and procurement specialists supporting day-to-day client operations.</p>
+          </div>
+          <div class="team-row">
+            <div class="role">Information technology</div>
+            <p>Network infrastructure, software, cybersecurity and IT support specialists delivering tailored digital solutions.</p>
+          </div>
+          <div class="team-row">
+            <div class="role">Quality assurance</div>
+            <p>Rigorous quality control, inspection and compliance processes applied across every project and service line.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="grid-bg"></div>
+    <div class="wrap contact-inner">
+      <div class="reveal">
+        <div class="eyebrow">Get in touch</div>
+        <h2>Tell us about your site.</h2>
+        <p>Whether it's a single cabling job or a full remote-site communications build, our team will scope it and get back to you.</p>
+
+        <div class="info-row">
+          <div class="k">Company</div>
+          <div class="v">BELADI COMPANY FOR GENERAL CONTRACTING, GENERAL SERVICES AND INFORMATION TECHNOLOGY LTD.</div>
+        </div>
+        <div class="info-row">
+          <div class="k">Email</div>
+          <div class="v"><a href="mailto:info@beladi.co">info@beladi.co</a></div>
+        </div>
+        <div class="info-row">
+          <div class="k">Phone</div>
+          <div class="v"><a href="tel:+9647810880886">+964 781 0880886</a></div>
+        </div>
+        <div class="info-row">
+          <div class="k">Address</div>
+          <div class="v">Al Jazaar, Basra, Iraq</div>
+        </div>
+      </div>
+
+      <form id="contactForm" onsubmit="return false;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" type="text" placeholder="Organization name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@company.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Project details</label>
+          <textarea id="message" rows="4" placeholder="Tell us about the site, scope and timeline"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="sendBtn">Send message →</button>
+        <p id="formNote" style="font-size:12px;color:var(--steel);display:none;">Thanks — this opens your email client to send the message to info@beladi.co.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <img src="assets/logo-wordmark.png" alt="Beladi" height="20" style="opacity:0.9;">
+      <span>© <span id="year"></span> Beladi Company for General Contracting, General Services and Information Technology Ltd.</span>
+    </div>
+    <span class="mono">BASRA, IRAQ · BELADI.COMPANY</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile menu
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.style.display === 'block';
+    mobileMenu.style.display = isOpen ? 'none' : 'block';
+    burgerBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.style.display = 'none';
+    burgerBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // contact form -> mailto (no backend available; keeps it functional as a static site)
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', () => {
+    const name = document.getElementById('name').value || 'there';
+    const company = document.getElementById('company').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const body = encodeURIComponent(
+      `Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\n${message}`
+    );
+    window.location.href = `mailto:info@beladi.co?subject=Project inquiry from ${encodeURIComponent(name)}&body=${body}`;
+    document.getElementById('formNote').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+       auto_https off
+   }
+
+   :{$PORT} {
+       root * /www
+       file_server
+       encode gzip
+   }
