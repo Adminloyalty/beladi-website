@@ -655,7 +655,7 @@
         </div>
         <div class="info-row">
           <div class="k">Email</div>
-          <div class="v"><a href="mailto:info@beladi.co">info@beladi.co</a></div>
+          <div class="v"><a href="mailto:info@beladi.com.iq">info@beladi.com.iq</a></div>
         </div>
         <div class="info-row">
           <div class="k">Phone</div>
@@ -663,7 +663,7 @@
         </div>
         <div class="info-row">
           <div class="k">Address</div>
-          <div class="v">Al Jazaar, Basra, Iraq</div>
+          <div class="v">Al Tahsiniyya, Basra, Iraq</div>
         </div>
       </div>
 
@@ -685,7 +685,7 @@
           <textarea id="message" rows="4" placeholder="Tell us about the site, scope and timeline"></textarea>
         </div>
         <button type="submit" class="submit-btn" id="sendBtn">Send message →</button>
-        <p id="formNote" style="font-size:12px;color:var(--steel);display:none;">Thanks — this opens your email client to send the message to info@beladi.co.</p>
+        <p id="formNote" style="font-size:12px;color:var(--steel);display:none;">Thanks — this opens your email client to send the message to info@beladi.com.iq.</p>
       </form>
     </div>
   </section>
@@ -740,7 +740,7 @@
     const body = encodeURIComponent(
       `Name: ${name}\nCompany: ${company}\nEmail: ${email}\n\n${message}`
     );
-    window.location.href = `mailto:info@beladi.co?subject=Project inquiry from ${encodeURIComponent(name)}&body=${body}`;
+    window.location.href = `mailto:info@beladi.com.iq?subject=Project inquiry from ${encodeURIComponent(name)}&body=${body}`;
     document.getElementById('formNote').style.display = 'block';
   });
 </script>
